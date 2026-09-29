@@ -1,0 +1,11 @@
+Langfuse API evidence (observations v2), checked 2026-09-29.
+Project: day13-k4-l3a-2A202602388.
+Trace: 2056887082a12df0a5d1ea8d93976738
+Correlation ID: req-b25ae916
+
+root  dbd6879ec7e7ead6  lab-agent-run     AGENT       2.655 s
+  |- e0351c8065afc607  retrieve-context  RETRIEVER   2.501 s
+  `- 610582d3a0df9e8c  generate-response GENERATION  0.152 s
+
+Both children have parentObservationId=dbd6879ec7e7ead6. Retrieval accounts for approximately 94% of root latency; generation is not the slow span.
+Source: langfuse-cli api observations list --trace-id 2056887082a12df0a5d1ea8d93976738 --fields core,basic,metadata,model,usage,prompt,metrics --json.

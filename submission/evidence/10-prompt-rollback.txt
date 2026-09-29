@@ -1,0 +1,9 @@
+Prompt rollback verification, checked 2026-09-29.
+Project: day13-k4-l3a-2A202602388.
+Current production label resolves to day13-chat v1 (active=true).
+Candidate label resolves to day13-chat v2 (active=false).
+Before/after screenshots of the earlier promote-and-rollback action were not captured.
+Managed production/v1 trace: 2056887082a12df0a5d1ea8d93976738 (correlation req-b25ae916).
+Managed candidate/v2 trace: 1c435e565b3bef4f95e0745e31dccf7d (correlation req-8aa0af7b).
+The v2 trace was created from one previously authorized sample query in data/sample_queries.jsonl; Cloud API confirms root prompt_source=langfuse, prompt_label=candidate, prompt_version=2 and generation promptName=day13-chat, promptVersion=2.
+This file proves both versions have traces and the final label state; it does not claim a before/after UI screenshot.

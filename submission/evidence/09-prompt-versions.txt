@@ -1,0 +1,8 @@
+Langfuse API evidence, checked 2026-09-29.
+Project: day13-k4-l3a-2A202602388.
+Prompt: day13-chat
+v1: active=true; labels=baseline,production.
+v2: active=false; labels=candidate,latest.
+
+Source: langfuse-cli api prompts get day13-chat --label production --json and --label candidate --json.
+The API confirms current state; it does not independently prove a historical promotion event.

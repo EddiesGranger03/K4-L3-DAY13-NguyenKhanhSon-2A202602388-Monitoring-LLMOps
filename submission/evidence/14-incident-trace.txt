@@ -1,0 +1,11 @@
+Langfuse API evidence (observations v2), checked 2026-09-29.
+Project: day13-k4-l3a-2A202602388.
+Incident trace ID: 2056887082a12df0a5d1ea8d93976738
+Matching application-log correlation ID: req-b25ae916
+Trace start: 2026-09-29 09:28:43 UTC; root latency: 2.655 s.
+Retriever: e0351c8065afc607, 2.501 s.
+Generation: 610582d3a0df9e8c, 0.152 s.
+Generation prompt: day13-chat v1; model: claude-sonnet-4-5; 143 total tokens; $0.001713.
+
+The log at 2026-09-29T09:28:46.369059Z records response_sent latency_ms=2654 with the same correlation ID. The retriever span explains most of the delay.
+Source: langfuse-cli api observations list --trace-id 2056887082a12df0a5d1ea8d93976738 --fields core,basic,metadata,model,usage,prompt,metrics --json.

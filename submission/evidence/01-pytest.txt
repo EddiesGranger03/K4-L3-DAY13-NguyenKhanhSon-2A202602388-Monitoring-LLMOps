@@ -1,0 +1,15 @@
+Command:
+  .\.venv\Scripts\python.exe -m pytest -q -p no:cacheprovider --basetemp=.pytest_work
+
+Result:
+  26 passed, 4 warnings in 2.16s
+
+Warnings:
+  Langfuse SDK/backoff emit DeprecationWarning for asyncio.iscoroutinefunction.
+  Span export attempts failed in this execution environment with WinError 10013
+  (outbound connection not permitted). Pytest passed, but this run does not prove
+  that the traces reached Langfuse Cloud.
+
+Capture note:
+  Output from the current working tree on 2026-09-29; source changes are not yet
+  committed. Re-run on the final commit before submitting this evidence.

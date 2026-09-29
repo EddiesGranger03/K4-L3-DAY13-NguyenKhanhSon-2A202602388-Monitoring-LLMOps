@@ -1,25 +1,28 @@
 alerts:
-  - name: TODO_alert_1
-    severity: TODO
-    condition: TODO
-    duration: TODO
+  - name: Elevated user-facing error rate
+    severity: page
+    condition: 'error_rate_pct > 2 over a rolling 5m window with at least 20 requests'
+    duration: 5m
     type: symptom-based
-    channel: slack
-    owner: TODO
+    channel: "#llmops-alerts"
+    channel_type: slack
+    owner: LLMOps on-call
     runbook: docs/alerts.md#alert-1
-  - name: TODO_alert_2
-    severity: TODO
-    condition: TODO
-    duration: TODO
+  - name: Slow chat responses
+    severity: page
+    condition: 'response_sent latency_ms p95 > 3000 over a rolling 5m window'
+    duration: 5m
     type: symptom-based
-    channel: slack
-    owner: TODO
+    channel: "#llmops-alerts"
+    channel_type: slack
+    owner: LLMOps on-call
     runbook: docs/alerts.md#alert-2
-  - name: TODO_alert_3
-    severity: TODO
-    condition: TODO
-    duration: TODO
+  - name: Retrieval unavailable to users
+    severity: ticket
+    condition: 'retrieval success rate < 90% over a rolling 10m window, minimum 20 requests'
+    duration: 10m
     type: symptom-based
-    channel: slack
-    owner: TODO
+    channel: "#llmops-alerts"
+    channel_type: slack
+    owner: AI application team
     runbook: docs/alerts.md#alert-3

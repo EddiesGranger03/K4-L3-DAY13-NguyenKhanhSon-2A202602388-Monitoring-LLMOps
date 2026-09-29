@@ -7,7 +7,12 @@ primary_slo:
     total_event: 'event == "request_received"'
   target_percent: 99.5
   error_budget_percent: 0.5
-  note: Học viên phải giải thích hoặc điều chỉnh ngưỡng bằng baseline của mình.
+  note: >-
+    Trong mỗi cửa sổ 28 ngày, ít nhất 99.5% request nhận response_sent trong
+    tối đa 3000 ms; request_failed hoặc response quá 3000 ms tiêu thụ error
+    budget. Error budget 0.5% được tính bằng 100% - target 99.5%, tương đương
+    tối đa 1 request lỗi/chậm trên mỗi 200 request. Đối chiếu baseline thực tế
+    trước khi thay ngưỡng cho một deployment thật.
 guardrails:
   error_rate_pct_max: 2
   daily_cost_usd_max: 2.5

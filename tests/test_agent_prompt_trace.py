@@ -20,12 +20,16 @@ class RecordingLangfuseClient:
     def __init__(self) -> None:
         self.prompt = ManagedPrompt()
         self.span_updates: list[dict] = []
+        self.generation_updates: list[dict] = []
 
     def get_prompt(self, name: str, **kwargs):
         return self.prompt
 
     def update_current_span(self, **kwargs) -> None:
         self.span_updates.append(kwargs)
+
+    def update_current_generation(self, **kwargs) -> None:
+        self.generation_updates.append(kwargs)
 
 
 def test_agent_records_prompt_version_with_v4_observation_api(monkeypatch) -> None:
@@ -54,7 +58,7 @@ def test_agent_records_prompt_version_with_v4_observation_api(monkeypatch) -> No
         correlation_id="req-12345678",
     )
 
-    span_update = client.span_updates[-1]
+    span_update = next(update for update in client.span_updates if "version" in update)
     assert span_update["metadata"] == {
         "doc_count": 1,
         "query_preview": "Explain traces",
@@ -67,3 +71,31 @@ def test_agent_records_prompt_version_with_v4_observation_api(monkeypatch) -> No
     assert span_update["version"] == "3"
     assert propagated[0]["metadata"]["correlation_id"] == "req-12345678"
     assert propagated[-1]["prompt"] is client.prompt
+
+
+def test_agent_traces_sanitized_retrieval_and_generation_details(monkeypatch) -> None:
+    client = RecordingLangfuseClient()
+    monkeypatch.setattr(agent_module, "get_langfuse_client", lambda: client)
+
+    agent = agent_module.LabAgent()
+    docs = agent_module.LabAgent._retrieve_context.__wrapped__(
+        agent, "Refund for son@example.com"
+    )
+    response = agent_module.LabAgent._generate_response.__wrapped__(
+        agent, "Question from son@example.com"
+    )
+
+    assert docs
+    assert client.span_updates[0]["input"] == {
+        "query": "Refund for [REDACTED_EMAIL]"
+    }
+    assert client.generation_updates[0]["input"] == {
+        "prompt": "Question from [REDACTED_EMAIL]"
+    }
+    generation = client.generation_updates[-1]
+    assert generation["model"] == response.model
+    assert generation["usage_details"] == {
+        "input": response.usage.input_tokens,
+        "output": response.usage.output_tokens,
+    }
+    assert generation["cost_details"]["total"] > 0

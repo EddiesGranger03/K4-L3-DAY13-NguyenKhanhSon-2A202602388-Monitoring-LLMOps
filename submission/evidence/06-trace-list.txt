@@ -1,0 +1,19 @@
+Langfuse API evidence (observations v2), checked 2026-09-29.
+Project: day13-k4-l3a-2A202602388 (cmumd907z15vgad0da7h6noos).
+Filter: root observation name = lab-agent-run; original 10-query workload around 08:34 UTC.
+These original workload traces used local-v1 fallback; they do not prove managed prompt use.
+
+trace_id                          correlation_id
+856ba86e1f00c7b9e58e225ee8dc0de2  req-48e4f83e
+868f704d42831b82fce189e1e83ca8ab  req-27a4db53
+4ce8e9ee1dc4912ac4cd39940e526146  req-7a5773f1
+2db63b9d6489445664e6f75bc0bf40c8  req-d2f232a9
+2bde073d90361c886b45af936ccd979b  req-808ce786
+0ad87b314b4097b74d418c0ad84f63dd  req-7a61ca5c
+c41216f301eea61790fa3e1cf910e1a8  req-67abef88
+06a4a1f4441b273ff18a5830568df61f  req-039e561c
+c5677b92335f9087ea9528755209cb6b  req-74ba366d
+d069c013615becfae80944c70395a4b1  req-00a4eb23
+
+Source: langfuse-cli api observations list --name lab-agent-run --fields core,basic,metadata,prompt,metrics --json.
+No prompt/input/output/PII or API keys are included here.

@@ -33,6 +33,14 @@ Validator kiểm tra cấu trúc contract; nó không thể chứng minh biểu 
 
 ## Cách kiểm tra runtime
 
+Dashboard cục bộ của bài làm dùng FastAPI và đọc trực tiếp structured log; từ thư mục repo trên PowerShell chạy:
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn app.dashboard:app --host 127.0.0.1 --port 8501
+```
+
+Mở `http://127.0.0.1:8501/?end=latest` cho sáu panel; dùng `http://127.0.0.1:8501/incident?end=2026-09-29T09:29:00Z` để xem khoảng challenge đã ghi nhận và `http://127.0.0.1:8501/log/req-b25ae916` cho log tương ứng. Các trang này hiển thị field log đã lọc, không phải giao diện Langfuse. Dừng server bằng Ctrl+C sau khi chụp.
+
 1. Lưu ảnh baseline và giá trị P95/error/cost hiện tại.
 2. Bật một incident practice, ví dụ `python scripts/inject_incident.py --scenario rag_slow`.
 3. Chạy lại load test với cùng input và concurrency.

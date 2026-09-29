@@ -1,0 +1,11 @@
+Langfuse API evidence (observations v2), checked 2026-09-29.
+Project: day13-k4-l3a-2A202602388.
+Trace ID: 2056887082a12df0a5d1ea8d93976738
+Correlation ID: req-b25ae916
+Root prompt source: langfuse; version: 1; prompt label: production.
+Generation prompt: day13-chat v1; model: claude-sonnet-4-5.
+Usage: 36 input tokens, 107 output tokens, 143 total tokens.
+Cost: $0.000108 input, $0.001605 output, $0.001713 total.
+TTFT in matching application log: 50 ms.
+
+Only whitelisted operational metadata is reproduced; no prompt text, raw input/output, keys, or PII.

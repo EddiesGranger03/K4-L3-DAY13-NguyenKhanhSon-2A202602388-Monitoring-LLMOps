@@ -4,6 +4,16 @@ import os
 from contextlib import contextmanager
 from typing import Any
 
+# Langfuse reads its credentials when the client is initialized. Load the local
+# development environment before importing the SDK so `get_client()` cannot be
+# cached with missing credentials.
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except ImportError:  # pragma: no cover - requirements are not installed yet
+    pass
+
 try:
     from langfuse import get_client, observe, propagate_attributes
 
@@ -24,6 +34,12 @@ except ImportError:  # pragma: no cover - chỉ dùng khi chưa cài requirement
         def update_current_generation(self, **kwargs: Any) -> None:
             return None
 
+        def flush(self) -> None:
+            return None
+
+        def shutdown(self) -> None:
+            return None
+
     def get_client():
         return _DummyClient()
 
@@ -40,3 +56,9 @@ def tracing_enabled() -> bool:
     return LANGFUSE_SDK_AVAILABLE and bool(
         os.getenv("LANGFUSE_PUBLIC_KEY") and os.getenv("LANGFUSE_SECRET_KEY")
     )
+
+
+def shutdown_tracing() -> None:
+    """Flush queued observations and stop the SDK during app shutdown."""
+    if tracing_enabled():
+        get_langfuse_client().shutdown()

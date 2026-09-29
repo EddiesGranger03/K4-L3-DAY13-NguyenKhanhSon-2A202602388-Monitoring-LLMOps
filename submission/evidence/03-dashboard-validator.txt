@@ -1,0 +1,13 @@
+Command:
+  .\.venv\Scripts\python.exe scripts\validate_dashboard.py
+
+Result:
+  HỢP LỆ: 6/6 panel có trong dashboard contract.
+
+Scope note:
+  Đây xác nhận cấu hình contract; không chứng minh dashboard runtime đã render
+  dữ liệu hoặc incident panels. Runtime evidence: 11-dashboard-overview.png.
+
+Capture note:
+  Re-run after committing the final source/report/evidence so the output matches
+  the exact commit submitted for grading.
